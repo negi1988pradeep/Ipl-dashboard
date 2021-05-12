@@ -4,7 +4,7 @@ import { MatchDetailCard } from '../components/MatchDetailCard';
 
 export const MatchPage = () => {
 
- const [matches, setMatches] = useState({});
+ const [matches, setMatches] = useState([]);
  const { teamName, year } = useParams();
 
   useEffect(
@@ -16,15 +16,15 @@ export const MatchPage = () => {
                 setMatches(data);
             };
             fetchMatches();
-        },[]
+        },[teamName,year]
   );
   if(!matches){
       return <h1>Matches Not Found</h1>;
-    }
+  }
   return (
     <div className="MatchPage">
       <h1>Match Page</h1>
-       { matches.map(match => <MatchDetailCard teamName={teamName} match={match}/>)}
+        { matches.map(match => <MatchDetailCard key={match.id} teamName={teamName} match={match}/>)}
     </div>
   );
 }
