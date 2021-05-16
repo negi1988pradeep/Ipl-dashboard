@@ -9,14 +9,22 @@ export const MatchDetailCard = ({teamName, match}) => {
     const otherTeam = (match.team1 === teamName) ? match.team2 : match.team1;
     const otherTeamRoute = `/teams/${otherTeam}`;
     const isMatchWon = teamName === match.matchWinner;
+    const isMatchTie = match.result == 'tie'? true : false;
+    var cardcolor = isMatchTie ? 'MatchDetailCard tie-card': isMatchWon ? 'MatchDetailCard won-card' : 'MatchDetailCard lost-card';
+    var matchResult = "";
+      if(isMatchTie) {
+          matchResult = "Match tied between" + match.team1 + " and " + match.team2;
+      } else {
+          matchResult = match.matchWinner + " won by " + match.resultMargin + " " + match.result;
+      }
   return (
-    <div className={isMatchWon ? 'MatchDetailCard won-card' : 'MatchDetailCard lost-card'}>
+    <div className={cardcolor}>
        <div>
             <span className="vs">vs</span>
             <h1><Link to={otherTeamRoute}>{otherTeam}</Link></h1>
             <h2 className="match-date">{match.date}</h2>
             <h3 className="match-venue">at {match.venue}</h3>
-            <h3 className="match-result">{match.matchWinner} won by {match.resultMargin} {match.result} </h3>
+            <h3 className="match-result">{matchResult}</h3>
        </div>
         <div className="additional-detail">
             <h3>First Innings</h3>
