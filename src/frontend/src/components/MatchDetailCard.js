@@ -9,7 +9,7 @@ export const MatchDetailCard = ({teamName, match}) => {
     const otherTeam = (match.team1 === teamName) ? match.team2 : match.team1;
     const otherTeamRoute = `/teams/${otherTeam}`;
     const isMatchWon = teamName === match.matchWinner;
-    const isMatchTie = match.result == 'tie'? true : false;
+    const isMatchTie = match.result === 'tie'? true : false;
     var cardcolor = isMatchTie ? 'MatchDetailCard tie-card': isMatchWon ? 'MatchDetailCard won-card' : 'MatchDetailCard lost-card';
     var matchResult = "";
       if(isMatchTie) {
